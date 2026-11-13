@@ -1,0 +1,122 @@
+
+[
+  {
+    "id": "VULN-001",
+    "title": "Unauthorized cross-user refund",
+    "category": "missing_authorization",
+    "description": "A user can trigger a refund for another customer's order.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": true,
+      "authorization_bypass_verified": true,
+      "unauthorized_action_observed": true,
+      "effective_security_control_verified": false,
+      "verification_completed": true
+    },
+    "impact": "high",
+    "exposure": "authenticated_user",
+    "expected_classification": "CONFIRMED"
+  },
+  {
+    "id": "VULN-002",
+    "title": "Tainted order ID with effective authorization",
+    "category": "taint_analysis",
+    "description": "User-controlled order ID reaches a refund function, but ownership and approval checks block unauthorized execution.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": true,
+      "authorization_bypass_verified": false,
+      "unauthorized_action_observed": false,
+      "effective_security_control_verified": true,
+      "verification_completed": true
+    },
+    "impact": "high",
+    "exposure": "authenticated_user",
+    "expected_classification": "FALSE_POSITIVE"
+  },
+  {
+    "id": "VULN-003",
+    "title": "Prompt injection causes unauthorized tool execution",
+    "category": "prompt_injection",
+    "description": "A malicious support ticket induces an unauthorized refund that the backend executes.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": true,
+      "authorization_bypass_verified": true,
+      "unauthorized_action_observed": true,
+      "effective_security_control_verified": false,
+      "verification_completed": true
+    },
+    "impact": "high",
+    "exposure": "external_content",
+    "expected_classification": "CONFIRMED"
+  },
+  {
+    "id": "VULN-004",
+    "title": "Prompt injection blocked by secure executor",
+    "category": "prompt_injection",
+    "description": "The model requests an unauthorized refund, but the backend rejects it.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": true,
+      "authorization_bypass_verified": false,
+      "unauthorized_action_observed": false,
+      "effective_security_control_verified": true,
+      "verification_completed": true
+    },
+    "impact": "medium",
+    "exposure": "external_content",
+    "expected_classification": "FALSE_POSITIVE"
+  },
+  {
+    "id": "VULN-005",
+    "title": "Possible document authorization bypass",
+    "category": "missing_authorization",
+    "description": "Static analysis found a document retrieval path without a recognizable ownership guard. Exploitability has not been verified.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": true,
+      "authorization_bypass_verified": null,
+      "unauthorized_action_observed": null,
+      "effective_security_control_verified": null,
+      "verification_completed": false
+    },
+    "impact": "high",
+    "exposure": "authenticated_user",
+    "expected_classification": "UNRESOLVED"
+  },
+  {
+    "id": "VULN-006",
+    "title": "Possible excessive-agency vulnerability",
+    "category": "excessive_agency",
+    "description": "An agent has access to a sensitive administrative tool, but the tool's effective permissions have not been tested.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": null,
+      "authorization_bypass_verified": null,
+      "unauthorized_action_observed": null,
+      "effective_security_control_verified": null,
+      "verification_completed": false
+    },
+    "impact": "high",
+    "exposure": "external_content",
+    "expected_classification": "UNRESOLVED"
+  },
+  {
+    "id": "VULN-007",
+    "title": "Malformed tool arguments rejected",
+    "category": "tool_validation",
+    "description": "An LLM supplies unauthorized tool arguments, and the executor rejects them.",
+    "evidence": {
+      "attacker_controlled_input": true,
+      "sensitive_operation_reachable": false,
+      "authorization_bypass_verified": false,
+      "unauthorized_action_observed": false,
+      "effective_security_control_verified": true,
+      "verification_completed": true
+    },
+    "impact": "low",
+    "exposure": "authenticated_user",
+    "expected_classification": "FALSE_POSITIVE"
+  }
+]

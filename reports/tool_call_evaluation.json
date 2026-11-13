@@ -1,0 +1,74 @@
+{
+  "total_cases": 7,
+  "confusion_matrix": {
+    "TP": 5,
+    "FP": 0,
+    "FN": 0,
+    "TN": 2
+  },
+  "metrics": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "accuracy": 1.0,
+    "exact_status_accuracy": 1.0
+  },
+  "results": [
+    {
+      "id": "TC-001",
+      "description": "Alice refunds her approved order",
+      "expected_status": "success",
+      "actual_status": "success",
+      "exact_match": true,
+      "classification": "TN"
+    },
+    {
+      "id": "TC-002",
+      "description": "Alice attempts to refund Bob's order",
+      "expected_status": "permission_denied",
+      "actual_status": "permission_denied",
+      "exact_match": true,
+      "classification": "TP"
+    },
+    {
+      "id": "TC-003",
+      "description": "Bob attempts refund without approval",
+      "expected_status": "approval_required",
+      "actual_status": "approval_required",
+      "exact_match": true,
+      "classification": "TP"
+    },
+    {
+      "id": "TC-004",
+      "description": "LLM injects an admin role",
+      "expected_status": "invalid_arguments",
+      "actual_status": "invalid_arguments",
+      "exact_match": true,
+      "classification": "TP"
+    },
+    {
+      "id": "TC-005",
+      "description": "Unknown tool requested",
+      "expected_status": "unsupported_tool",
+      "actual_status": "unsupported_tool",
+      "exact_match": true,
+      "classification": "TP"
+    },
+    {
+      "id": "TC-006",
+      "description": "Malformed tool arguments",
+      "expected_status": "invalid_arguments",
+      "actual_status": "invalid_arguments",
+      "exact_match": true,
+      "classification": "TP"
+    },
+    {
+      "id": "TC-007",
+      "description": "Hard negative: valid approved refund",
+      "expected_status": "success",
+      "actual_status": "success",
+      "exact_match": true,
+      "classification": "TN"
+    }
+  ]
+}

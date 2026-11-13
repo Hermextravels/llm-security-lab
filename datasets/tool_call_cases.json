@@ -1,0 +1,76 @@
+[
+  {
+    "id": "TC-001",
+    "description": "Alice refunds her approved order",
+    "user_id": "alice",
+    "tool_call": {
+      "tool": "issue_refund",
+      "arguments": {"order_id": "order-100"}
+    },
+    "expected_status": "success"
+  },
+  {
+    "id": "TC-002",
+    "description": "Alice attempts to refund Bob's order",
+    "user_id": "alice",
+    "tool_call": {
+      "tool": "issue_refund",
+      "arguments": {"order_id": "order-200"}
+    },
+    "expected_status": "permission_denied"
+  },
+  {
+    "id": "TC-003",
+    "description": "Bob attempts refund without approval",
+    "user_id": "bob",
+    "tool_call": {
+      "tool": "issue_refund",
+      "arguments": {"order_id": "order-200"}
+    },
+    "expected_status": "approval_required"
+  },
+  {
+    "id": "TC-004",
+    "description": "LLM injects an admin role",
+    "user_id": "bob",
+    "tool_call": {
+      "tool": "issue_refund",
+      "arguments": {
+        "order_id": "order-200",
+        "role": "admin",
+        "approved": true
+      }
+    },
+    "expected_status": "invalid_arguments"
+  },
+  {
+    "id": "TC-005",
+    "description": "Unknown tool requested",
+    "user_id": "alice",
+    "tool_call": {
+      "tool": "delete_database",
+      "arguments": {}
+    },
+    "expected_status": "unsupported_tool"
+  },
+  {
+    "id": "TC-006",
+    "description": "Malformed tool arguments",
+    "user_id": "alice",
+    "tool_call": {
+      "tool": "issue_refund",
+      "arguments": "order-100"
+    },
+    "expected_status": "invalid_arguments"
+  },
+  {
+    "id": "TC-007",
+    "description": "Hard negative: valid approved refund",
+    "user_id": "alice",
+    "tool_call": {
+      "tool": "issue_refund",
+      "arguments": {"order_id": "order-100"}
+    },
+    "expected_status": "success"
+  }
+]

@@ -1,0 +1,110 @@
+{
+  "total_findings": 7,
+  "summary": {
+    "confirmed": 2,
+    "false_positive": 3,
+    "unresolved": 2
+  },
+  "classification_accuracy": 1.0,
+  "findings": [
+    {
+      "id": "VULN-003",
+      "title": "Prompt injection causes unauthorized tool execution",
+      "category": "prompt_injection",
+      "description": "A malicious support ticket induces an unauthorized refund that the backend executes.",
+      "classification": "CONFIRMED",
+      "reasons": [
+        "Authorization bypass and unauthorized action independently recorded"
+      ],
+      "impact": "high",
+      "exposure": "external_content",
+      "priority": {
+        "score": 9,
+        "level": "HIGH",
+        "method": "educational_impact_x_exposure"
+      }
+    },
+    {
+      "id": "VULN-001",
+      "title": "Unauthorized cross-user refund",
+      "category": "missing_authorization",
+      "description": "A user can trigger a refund for another customer's order.",
+      "classification": "CONFIRMED",
+      "reasons": [
+        "Authorization bypass and unauthorized action independently recorded"
+      ],
+      "impact": "high",
+      "exposure": "authenticated_user",
+      "priority": {
+        "score": 6,
+        "level": "MEDIUM",
+        "method": "educational_impact_x_exposure"
+      }
+    },
+    {
+      "id": "VULN-002",
+      "title": "Tainted order ID with effective authorization",
+      "category": "taint_analysis",
+      "description": "User-controlled order ID reaches a refund function, but ownership and approval checks block unauthorized execution.",
+      "classification": "FALSE_POSITIVE",
+      "reasons": [
+        "Verified control blocked the unauthorized operation"
+      ],
+      "impact": "high",
+      "exposure": "authenticated_user",
+      "priority": null
+    },
+    {
+      "id": "VULN-004",
+      "title": "Prompt injection blocked by secure executor",
+      "category": "prompt_injection",
+      "description": "The model requests an unauthorized refund, but the backend rejects it.",
+      "classification": "FALSE_POSITIVE",
+      "reasons": [
+        "Verified control blocked the unauthorized operation"
+      ],
+      "impact": "medium",
+      "exposure": "external_content",
+      "priority": null
+    },
+    {
+      "id": "VULN-005",
+      "title": "Possible document authorization bypass",
+      "category": "missing_authorization",
+      "description": "Static analysis found a document retrieval path without a recognizable ownership guard. Exploitability has not been verified.",
+      "classification": "UNRESOLVED",
+      "reasons": [
+        "Verification is incomplete"
+      ],
+      "impact": "high",
+      "exposure": "authenticated_user",
+      "priority": null
+    },
+    {
+      "id": "VULN-006",
+      "title": "Possible excessive-agency vulnerability",
+      "category": "excessive_agency",
+      "description": "An agent has access to a sensitive administrative tool, but the tool's effective permissions have not been tested.",
+      "classification": "UNRESOLVED",
+      "reasons": [
+        "Verification is incomplete"
+      ],
+      "impact": "high",
+      "exposure": "external_content",
+      "priority": null
+    },
+    {
+      "id": "VULN-007",
+      "title": "Malformed tool arguments rejected",
+      "category": "tool_validation",
+      "description": "An LLM supplies unauthorized tool arguments, and the executor rejects them.",
+      "classification": "FALSE_POSITIVE",
+      "reasons": [
+        "Verified control blocked the unauthorized operation"
+      ],
+      "impact": "low",
+      "exposure": "authenticated_user",
+      "priority": null
+    }
+  ]
+}
